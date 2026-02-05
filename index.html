@@ -216,7 +216,7 @@
               fill="#ff7aa2"/>
     </svg>
     <h1>Shaggu  💖</h1>
-    <p>Will you be my Valentine my motu?</p>
+    <p id="asking">Will you be my Valentine my motu?</p>
 
     <div class="zone" id="zone">
         <button id="yes">Yes 💗</button>
@@ -229,7 +229,6 @@
 
     <div class="final" id="final">
         <h2>YAY!! 🎉💖</h2>
-
         <div class="photoFrame">
 <!--            <img id="photo" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"/>-->
             <img id="photo" src="shagufta.jpeg"/>
@@ -257,6 +256,8 @@
     const music = document.getElementById("music");
     const canvas = document.getElementById("confetti");
     const art = document.getElementById("art-emoji");
+    const asking = document.getElementById("asking");
+
     function resizeConfettiCanvas() {
         const dpr = Math.max(1, window.devicePixelRatio || 1);
         canvas.width = window.innerWidth * dpr;
@@ -346,6 +347,7 @@ Today. Tomorrow. Always ❤️`;
         document.querySelector(".zone").style.display = "none";
         msg.style.display = "none";
         art.style.display = "none";
+        asking.style.display = "none";
         final.style.display = "block";
         music.play().catch(()=>{});
 
