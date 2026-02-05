@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Only Ending 💖</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --pink: #ff3b7a;
+            --soft: #ffdbe9;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at top, #ffeaf3, #ffd3e4);
+            font-family: system-ui, sans-serif;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+
+        .card {
+            background: #ffffffdd;
+            backdrop-filter: blur(14px);
+            padding: 34px;
+            border-radius: 28px;
+            width: min(760px, 94vw);
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(0,0,0,.18);
+            z-index: 2;
+        }
+
+        .art {
+            width: min(260px, 80vw);
+            margin: 0 auto 20px;
+            display: block;
+            filter: drop-shadow(0 10px 14px rgba(0,0,0,.12));
+        }
+
+        h1 {
+            font-size: clamp(26px, 4vw, 44px);
+            margin-bottom: 6px;
+        }
+
+        p {
+            opacity: .8;
+            margin-bottom: 12px;
+        }
+
+        .zone {
+            position: relative;
+            height: 180px;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px 30px;
+            border-radius: 999px;
+            border: none;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all .6s ease-in-out;
+            box-shadow: 0 14px 30px rgba(0,0,0,.15);
+        }
+
+        #yes {
+            left: 22%;
+            background: var(--pink);
+            color: white;
+        }
+
+        #no {
+            left: 62%;
+            background: #e5e7eb;
+            color: #111;
+        }
+
+        .message {
+            margin-top: 16px;
+            font-size: 15px;
+            opacity: .75;
+        }
+
+        .final {
+            display: none;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .final h2 {
+            font-size: clamp(30px, 4vw, 48px);
+        }
+
+        .letter {
+            margin-top: 14px;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .photo {
+            margin-top: 16px;
+            width: min(320px, 90%);
+            border-radius: 18px;
+            box-shadow: 0 14px 30px rgba(0,0,0,.2);
+        }
+
+        /* Photo cinematic frame */
+        .photoFrame {
+            position: relative;
+            width: min(340px, 92%);
+            height: 420px;
+            margin: 18px auto 0;
+            overflow: hidden;
+            border-radius: 22px;
+            box-shadow: 0 18px 40px rgba(0,0,0,.25);
+        }
+
+        /* Photo starts OUTSIDE frame (above) */
+        #photo {
+            position: absolute;
+            width: 100%;
+            top: -120%;
+            left: 0;
+            transition: top 6s ease-in-out;
+        }
+
+        /* Dark gradient so text visible */
+        .photoOverlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                    to top,
+                    rgba(0,0,0,.65),
+                    rgba(0,0,0,.25),
+                    rgba(0,0,0,0)
+            );
+        }
+
+        /* Love letter ON TOP of photo */
+        .photoFrame .letter {
+            position: absolute;
+            bottom: 20px;
+            left: 18px;
+            right: 18px;
+            color: white;
+            font-size: 16px;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0,0,0,.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+<canvas id="confetti"></canvas>
+
+<div class="card">
+    <svg class="art" id="art-emoji" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="fur" x1="0" x2="1">
+                <stop offset="0" stop-color="#f7c7a1"/>
+                <stop offset="1" stop-color="#f2a97b"/>
+            </linearGradient>
+            <linearGradient id="heart" x1="0" x2="1">
+                <stop offset="0" stop-color="#ff4d7d"/>
+                <stop offset="1" stop-color="#ff1f68"/>
+            </linearGradient>
+        </defs>
+
+        <path d="M250 50 C250 33 270 25 282 38
+               C294 25 314 33 314 50
+               C314 78 282 92 282 106
+               C282 92 250 78 250 50Z"
+              fill="url(#heart)"/>
+
+        <path d="M90 120 C90 70 140 40 190 60
+               C240 40 290 70 290 120
+               C290 180 240 210 190 210
+               C140 210 90 180 90 120Z"
+              fill="url(#fur)"/>
+
+        <path d="M110 92 L95 55 L140 78 Z" fill="#f2a97b"/>
+        <path d="M270 92 L285 55 L240 78 Z" fill="#f2a97b"/>
+
+        <circle cx="160" cy="130" r="8"/>
+        <circle cx="220" cy="130" r="8"/>
+
+        <path d="M190 144 C186 144 182 148 182 152
+               C182 160 190 164 190 170
+               C190 164 198 160 198 152
+               C198 148 194 144 190 144Z"
+              fill="#ff7aa2"/>
+    </svg>
+    <h1>Shaggu  💖</h1>
+    <p>Will you be my Valentine my motu?</p>
+
+    <div class="zone" id="zone">
+        <button id="yes">Yes 💗</button>
+        <button id="no">No 😐</button>
+    </div>
+
+    <div class="message" id="msg">
+        Sometimes the heart already knows the answer 💞
+    </div>
+
+    <div class="final" id="final">
+        <h2>YAY!! 🎉💖</h2>
+
+        <div class="photoFrame">
+<!--            <img id="photo" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"/>-->
+            <img id="photo" src="shagufta.jpeg"/>
+            <div class="photoOverlay"></div>
+            <div class="letter" id="letter"></div>
+        </div>
+    </div>
+
+</div>
+
+<audio id="music">
+    <source src="song1.mp3" type="audio/mpeg">
+</audio>
+
+<!--<audio id="music" preload="auto">-->
+<!--    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">-->
+<!--</audio>-->
+
+<script>
+    const yes = document.getElementById("yes");
+    const no = document.getElementById("no");
+    const msg = document.getElementById("msg");
+    const final = document.getElementById("final");
+    const letter = document.getElementById("letter");
+    const music = document.getElementById("music");
+    const canvas = document.getElementById("confetti");
+    const art = document.getElementById("art-emoji");
+    function resizeConfettiCanvas() {
+        const dpr = Math.max(1, window.devicePixelRatio || 1);
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+    }
+
+    resizeConfettiCanvas();
+    window.addEventListener("resize", resizeConfettiCanvas);
+    window.addEventListener("orientationchange", resizeConfettiCanvas);
+
+    const confettiFx = confetti.create(canvas, { resize: true, useWorker: true });
+
+    let step = 0;
+    const noTexts = [
+        "No 😐",
+        "Are you sure? 🥺",
+        "This might hurt 😢",
+        "I already regret this 💔",
+    ];
+
+    const yesTexts = [
+        "Yes 💗",
+        "I care about you 💞",
+        "I choose you 🥹",
+        "Always you ❤️",
+    ];
+
+    const messages = [
+        "It’s okay… take a moment 💭",
+        "Think about us 🫶",
+        "Some choices feel heavy 💕",
+        "This one feels right, doesn’t it? 🥰"
+    ];
+
+    const loveLetter =
+        `From the very start,
+it’s always been you.
+
+The laughter, the comfort,
+the silly moments and quiet ones.
+
+Thank you for choosing us.
+Today. Tomorrow. Always ❤️`;
+
+    no.addEventListener("click", () => {
+        if (step < 4) {
+            step++;
+
+            // Update texts
+            no.textContent = noTexts[step] || "";
+            yes.textContent = yesTexts[step - 1];
+            msg.textContent = messages[step - 1];
+
+            // Keep YES in center, grow slowly
+            yes.style.left = "50%";
+            yes.style.top = "50%";
+            yes.style.transform = `translate(-50%, -50%) scale(${1 + step * 0.18})`;
+            yes.style.transition = "all 0.8s ease";
+
+            // NO goes to corners step-by-step (slow & dramatic)
+            const positions = [
+                { top: "10%", left: "10%" },   // top-left
+                { top: "10%", left: "75%" },   // top-right
+                { top: "95%", left: "5%" },   // bottom-left
+                { top: "75%", left: "75%" }    // bottom-right
+            ];
+
+            no.style.top = positions[step - 1].top;
+            no.style.left = positions[step - 1].left;
+            no.style.transition = "all 1.2s ease";
+
+            // Fade NO slowly with regret energy
+            no.style.opacity = 1 - step * 0.25;
+
+            // Final goodbye 👋
+            if (step === 4) {
+                setTimeout(() => {
+                    no.style.display = "none";
+                    msg.textContent = "Looks like there’s only one right choice now 💞";
+                }, 900);
+            }
+        }
+    });
+
+
+    yes.addEventListener("click", () => {
+        document.querySelector(".zone").style.display = "none";
+        msg.style.display = "none";
+        art.style.display = "none";
+        final.style.display = "block";
+        music.play().catch(()=>{});
+
+        (function frame() {
+            confettiFx({
+                particleCount: 20,
+                spread: 100,
+                origin: { x: Math.random(), y: Math.random() * 0.5 }
+            });
+            requestAnimationFrame(frame);
+        })();
+
+        // slide photo into frame slowly
+        setTimeout(() => {
+            document.getElementById("photo").style.top = "0%";
+        }, 400);
+
+        // typing effect over photo
+        let i = 0;
+        const t = setInterval(() => {
+            letter.textContent += loveLetter[i++] || "";
+            if (i >= loveLetter.length) clearInterval(t);
+        }, 55);
+
+    });
+</script>
+</body>
+</html>
